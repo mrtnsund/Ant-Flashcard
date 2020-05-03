@@ -4,6 +4,7 @@ import { ICard } from '../shared/card.interface';
 import * as _ from 'lodash';
 import { FormBuilder } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-add',
@@ -21,6 +22,7 @@ export class AddComponent implements OnInit {
     private cardService: CardService,
     private formBuilder: FormBuilder,
     private notification: NzNotificationService,
+    private dateService: DateService
   ) {
     this.addCardForm = this.formBuilder.group({
       question: '',
@@ -55,7 +57,7 @@ export class AddComponent implements OnInit {
       question: card.question,
       answer: card.answer,
       tags: card.tags,
-      date: new Date().toString(),
+      date: this.dateService.transformDate(new Date()),
       success: 0,
     };
     this.notification.blank(

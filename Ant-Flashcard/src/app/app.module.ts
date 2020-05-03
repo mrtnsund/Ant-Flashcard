@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { nb_NO } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, DatePipe } from '@angular/common';
 import nb from '@angular/common/locales/nb';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -28,6 +28,7 @@ import { AddComponent } from './add/add.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { DateService } from './services/date.service';
 registerLocaleData(nb);
 
 @NgModule({
@@ -63,6 +64,8 @@ registerLocaleData(nb);
     { provide: NZ_I18N, useValue: nb_NO },
     CardService,
     AuthService,
+    DatePipe,
+    DateService
   ],
   bootstrap: [AppComponent]
 })
