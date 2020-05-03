@@ -17,7 +17,7 @@ export class CardService {
     return this.http.get<ICard[]>(this.configUrl);
   }
   addCard(newCard: ICard): Observable<ICard> {
-    console.log(newCard)
+    console.log(newCard);
     return this.http.post<ICard>(this.configUrl, newCard);
   }
   updateCard(updatedCard: ICard): Observable<ICard> {

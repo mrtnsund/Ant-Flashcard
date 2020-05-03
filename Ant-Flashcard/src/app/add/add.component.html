@@ -1,6 +1,18 @@
-<textarea nz-input placeholder="Question" nzAutosize></textarea>
-<textarea nz-input placeholder="Answer" nzAutosize></textarea>
+<button nz-button><a [routerLink]="['/home']">Go back</a></button>
 
-<nz-select [(ngModel)]="tagValue" [nzSize]="size" nzMode="tags" nzPlaceHolder="Select tags">
-  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
-</nz-select>
+<h1>Add card</h1>
+<form [formGroup]="addCardForm" (ngSubmit)="onSubmit(addCardForm.value)">
+
+  <textarea nz-input placeholder="Question" nzAutosize formControlName="question"></textarea>
+  <textarea nz-input placeholder="Answer" nzAutosize formControlName="answer"></textarea>
+
+  <nz-select class="test" [nzSize]="size" nzMode="tags" nzPlaceHolder="Select tags" formControlName="tags">
+    <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+  </nz-select>
+  
+  <button nz-button nzType="default" type="submit">Add card</button>
+</form>
+
+<style>
+
+</style>

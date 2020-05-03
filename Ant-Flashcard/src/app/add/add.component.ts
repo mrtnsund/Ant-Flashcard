@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CardService } from '../services/card.service';
 import { ICard } from '../shared/card.interface';
 import * as _ from 'lodash';
+import { FormBuilder } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-add',
@@ -9,22 +11,29 @@ import * as _ from 'lodash';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  addCardForm;
   cards: ICard[];
   listOfOption: Array<{ label: string; value: string }> = [];
-
   size = 'default';
   newTags = [];
-  tagValue = [];
 
   constructor(
-    private cardService: CardService
-  ) { }
+    private cardService: CardService,
+    private formBuilder: FormBuilder,
+    private notification: NzNotificationService,
+  ) {
+    this.addCardForm = this.formBuilder.group({
+      question: '',
+      answer: '',
+      tags: [],
+    });
+  }
 
   ngOnInit(): void {
     this.cardService.getCards().subscribe(cards => {
       this.cards = cards;
       this.listOfOption = this.getExistingTags();
-    })
+    });
   }
 
   getExistingTags(): Array<any> {
@@ -40,6 +49,24 @@ export class AddComponent implements OnInit {
     console.log(uniqueTags);
     return uniqueTags;
     // return Array.from(new Set(uniqueTags));
+  }
+  onSubmit(card) {
+    const newCard: ICard = {
+      question: card.question,
+      answer: card.answer,
+      tags: card.tags,
+      date: new Date().toString(),
+      success: 0,
+    };
+    this.notification.blank(
+      'Card added',
+      '',
+      {nzPlacement: 'bottomRight'},
+    );
+    this.cardService.addCard(newCard).subscribe();
+    this.addCardForm.reset({
+      tags: this.addCardForm.get('tags').value
+    });
   }
 
 }

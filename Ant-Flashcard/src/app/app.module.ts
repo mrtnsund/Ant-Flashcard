@@ -27,6 +27,7 @@ import { ReviewComponent } from './review/review.component';
 import { AddComponent } from './add/add.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 registerLocaleData(nb);
 
 @NgModule({
@@ -55,7 +56,8 @@ registerLocaleData(nb);
     NzInputModule,
     NzButtonModule,
     NzSelectModule,
-    NzTagModule
+    NzTagModule,
+    NzNotificationModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: nb_NO },
