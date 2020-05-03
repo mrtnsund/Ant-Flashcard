@@ -1,0 +1,6 @@
+<textarea nz-input placeholder="Question" nzAutosize></textarea>
+<textarea nz-input placeholder="Answer" nzAutosize></textarea>
+
+<nz-select [(ngModel)]="tagValue" [nzSize]="size" nzMode="tags" nzPlaceHolder="Select tags">
+  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+</nz-select>
