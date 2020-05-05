@@ -1,1 +1,178 @@
-<p>review works!</p>
+
+<div class="header">
+  <a [routerLink]="['/home']">Back</a>
+  Click to logout
+  <button nz-button nzType="danger" nzShape="circle" (click)="logout()"><i nz-icon nzType="logout"></i></button>
+</div>
+<div class="container">
+
+  <div class="content">
+    <div class="greeting">
+      <h1>Today</h1>
+      <p>1 out of 14 cards</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+          <div class="upper">
+              <nz-progress [nzPercent]="10" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"  [nzShowInfo]="false"></nz-progress>
+              <div class="question center">
+                <h2>Hva heter ...</h2>
+              </div>
+          </div>
+          <div class="answer lower">
+            <div class="center">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste at possimus voluptates id! Accusantium modi numquam laboriosam iusto, assumenda harum.
+            </div>
+          </div>
+          <div class="revealButton">
+            <p>
+              SEE ANSWER
+            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .question {
+    padding-top: 15px;
+  }
+  .answer {
+    padding: 50px;
+  }
+  .center {
+    text-align: center;
+  }
+  .ant-progress-inner {
+    position: absolute !important;
+    top: 0 !important;
+  }
+
+  .greeting {
+    margin-top: 100px;
+    padding-bottom: 30px;
+  }
+  .greeting h1, .greeting p {
+    margin: 15px;
+  }
+  .greeting p {
+    margin-top: -15px;
+  }
+  .greeting h1 {
+    font-weight: bold;
+  }
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    background-color: white;
+    height: 10vh;
+  }
+  .container {
+    display: flex; 
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #EBEFF5 !important;
+    width: 100vw;
+    height: 90vh;
+  }
+  .cards {
+    display: flex;
+    flex-direction: row;
+  }
+  .card {
+    border-radius: 10px;
+    margin: 10px;
+    background-color: white;
+    width: 600px;
+    height: 300px;
+  }
+  .upper {
+    background: #F5F5F5;  /* fallback for old browsers */
+    height: 95px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .lower {
+    height: 50px;
+    background-color: white;
+  }
+  .lower p {
+    padding-left: 15px;
+  }
+  .lower h3 {
+    padding-left: 15px;
+    margin-top: -10px;
+  }
+  .lower p {
+    padding-top: 10px;
+  }
+  a {
+    color: #747474;
+  }
+  .add {
+    margin: 10px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .revealButton {
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 1px solid #F3F4F5;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+  }
+  .revealButton:hover {
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .revealButton p {
+    font-weight: 600;
+    padding-top: 15px;
+  }
+  
+  
+  @media only screen and (max-width: 700px) {
+    .greeting {
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 450px;
+      height: 390px;
+      margin: 5px;
+    }
+    .upper {
+    }
+    .lower {
+    }
+    .lower p {
+      font-size: 12px;
+    }
+
+  }
+  @media only screen and (max-width: 500px) {
+    .card {
+      width: 360px;
+      height: 312px;
+      margin: 2px;
+    }
+    .upper {
+    }
+    .lower {
+    }
+    .lower p {
+      font-size: 9px;
+      padding-left: 10px;
+    }
+    .lower h3 {
+      font-size: 12px;
+      padding-left: 10px;
+      padding-bottom: 2px;
+    }
+  }
+</style>

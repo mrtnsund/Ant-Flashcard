@@ -29,6 +29,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { DateService } from './services/date.service';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 registerLocaleData(nb);
 
 @NgModule({
@@ -59,6 +60,7 @@ registerLocaleData(nb);
     NzSelectModule,
     NzTagModule,
     NzNotificationModule,
+    NzProgressModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: nb_NO },
