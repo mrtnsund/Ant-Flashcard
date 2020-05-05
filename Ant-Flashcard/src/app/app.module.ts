@@ -30,6 +30,9 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { DateService } from './services/date.service';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { RandomComponent } from './review/random/random.component';
+import { CustomComponent } from './review/custom/custom.component';
 registerLocaleData(nb);
 
 @NgModule({
@@ -40,7 +43,9 @@ registerLocaleData(nb);
     RegisterComponent,
     PageNotFoundComponent,
     ReviewComponent,
-    AddComponent
+    AddComponent,
+    RandomComponent,
+    CustomComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,8 @@ registerLocaleData(nb);
     NzSelectModule,
     NzTagModule,
     NzNotificationModule,
-    NzProgressModule
+    NzProgressModule,
+    NzSpinModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: nb_NO },

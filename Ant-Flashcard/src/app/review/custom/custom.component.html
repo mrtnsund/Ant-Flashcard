@@ -6,6 +6,16 @@
   </div>
 </div>
 
+<div class="select" *ngIf="!selectedTag; else showBlock">
+  <form [formGroup]="selectTagForm" (ngSubmit)="selectTag(selectTagForm.value)">
+  <nz-select nzMode="tags" [nzTokenSeparators]="[',']" nzPlaceHolder="Select tags to include in your study" formControlName="tags">
+    <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+  </nz-select>
+  <button id="submitBtn" nz-button nzType="default" type="submit">Confirm</button>
+  </form>
+</div>
+
+<ng-template #showBlock>
 <div class="container" *ngIf="loaded; else loadingBlock">
   <div class="content">
     <div class="greeting">
@@ -64,6 +74,7 @@
       </div>
     </div>
   </ng-template>
+</ng-template>
 
 <style>
   .loader {

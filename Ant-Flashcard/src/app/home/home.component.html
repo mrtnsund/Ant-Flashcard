@@ -1,7 +1,9 @@
 
 <div class="header">
-  Click to logout
-  <button nz-button nzType="danger" nzShape="circle" (click)="logout()"><i nz-icon nzType="logout"></i></button>
+  <div class="left"></div>
+  <div class="right">
+    <p (click)="logout()">Logout</p>
+  </div>
 </div>
 <div class="container">
 
@@ -23,7 +25,7 @@
         </a>
       </div>
       <div class="card">
-        <a [routerLink]="['/review']">
+        <a [routerLink]="['/shuffle']">
           <div class="upper">
           </div>
           <div class="lower">
@@ -33,7 +35,7 @@
         </a>
       </div>
       <div class="card">
-        <a [routerLink]="['/review']">
+        <a [routerLink]="['/custom']">
           <div class="upper">
           </div>
           <div class="lower">
@@ -66,15 +68,24 @@
   }
   .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-color: white;
     height: 10vh;
+  }
+  .right {
+    padding-right: 50px;
+    font-size: 20px;
+    padding-top: 30px;
+    float:right;
+  }
+  .right p {
+    cursor: pointer;
   }
   .container {
     display: flex; 
     justify-content: center;
     flex-wrap: wrap;
-    background-color: #F5F5F5 !important;
+    background-color: #EBEFF5 !important;
     width: 100vw;
     height: 90vh;
   }
@@ -90,9 +101,10 @@
     height: 175px;
   }
   .upper {
-    background: #FFAFBD;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #ffc3a0, #FFAFBD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #E0EAFC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 
     height: 95px;
     border-top-right-radius: 10px;

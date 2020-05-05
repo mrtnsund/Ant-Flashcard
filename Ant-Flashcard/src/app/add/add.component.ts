@@ -5,6 +5,8 @@ import * as _ from 'lodash';
 import { FormBuilder } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { DateService } from '../services/date.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-add',
@@ -22,7 +24,9 @@ export class AddComponent implements OnInit {
     private cardService: CardService,
     private formBuilder: FormBuilder,
     private notification: NzNotificationService,
-    private dateService: DateService
+    private dateService: DateService,
+    private router: Router,
+    private authService: AuthService,
   ) {
     this.addCardForm = this.formBuilder.group({
       question: '',
@@ -69,6 +73,10 @@ export class AddComponent implements OnInit {
     this.addCardForm.reset({
       tags: this.addCardForm.get('tags').value
     });
+  }
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

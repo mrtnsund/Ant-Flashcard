@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { CardService } from '../services/card.service';
-import { DateService } from '../services/date.service';
-import { ICard } from '../shared/card.interface';
+import { CardService } from '../../services/card.service';
+import { DateService } from '../../services/date.service';
+import { ICard } from '../../shared/card.interface';
 
 @Component({
-  selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css']
+  selector: 'app-random',
+  templateUrl: './random.component.html',
+  styleUrls: ['./random.component.css']
 })
-export class ReviewComponent implements OnInit {
+export class RandomComponent implements OnInit {
   size = 'large';
   cardToDisplay: ICard;
   cards: ICard[];

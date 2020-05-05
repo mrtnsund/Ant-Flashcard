@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { CardService } from '../services/card.service';
-import { DateService } from '../services/date.service';
-import { ICard } from '../shared/card.interface';
+import { CardService } from '../../services/card.service';
+import { DateService } from '../../services/date.service';
+import { ICard } from '../../shared/card.interface';
+import { FormBuilder } from '@angular/forms';
+import * as _ from 'lodash';
+
 
 @Component({
-  selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css']
+  selector: 'app-custom',
+  templateUrl: './custom.component.html',
+  styleUrls: ['./custom.component.css']
 })
-export class ReviewComponent implements OnInit {
+export class CustomComponent implements OnInit {
+  listOfOption: Array<{ label: string; value: string }> = [];
+  size2 = 'default';
+  newTags = [];
+
   size = 'large';
   cardToDisplay: ICard;
   cards: ICard[];
@@ -19,22 +26,29 @@ export class ReviewComponent implements OnInit {
   revealAnswer: boolean;
   progressPercent: number;
   loaded: boolean = false;
+  selectedTag;
+  selectTagForm;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private cardService: CardService,
     private dateService: DateService,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.selectTagForm = this.formBuilder.group({
+      tags: []
+    });
+  }
 
   ngOnInit(): void {
     this.cardService.getCards().subscribe(cards => {
       this.cards = cards;
       this.index = 0;
-      this.dueCards = this.getDueCards();
-      this.cardToDisplay = this.dueCards[this.index];
-      this.progressPercent = 1 / this.dueCards.length * 100;
+      // this.progressPercent = 1 / this.dueCards.length * 100;
       this.loaded = true;
+      this.listOfOption = this.getExistingTags();
+
     });
   }
 
@@ -43,8 +57,7 @@ export class ReviewComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   getDueCards(): ICard[] {
-    const today = this.dateService.transformDate(new Date());
-    return this.cards.filter(card => (card.date <= today));
+    return this.cards.filter(card => (card.tags.includes(this.selectedTag)));
   }
   againClick(): void {
     const card = this.dueCards[this.index];
@@ -75,6 +88,27 @@ export class ReviewComponent implements OnInit {
   toggleAnswer(): void {
     this.revealAnswer = true;
   }
+  selectTag(tag): void {
+    this.selectedTag = tag;
+    this.dueCards = this.getDueCards();
+    this.cardToDisplay = this.dueCards[this.index];
 
+  }
 
+  getExistingTags(): Array<any> {
+    const allTags = [];
+    if (this.cards){
+      this.cards.forEach(x => x.tags.forEach(element => {
+        allTags.push({ label: element, value: element });
+      }))
+    }
+    if (allTags.length === 0) {
+      return null;
+    }
+
+    const uniqueTags = _.uniqBy(allTags, 'label');
+    console.log(uniqueTags);
+    return uniqueTags;
+    // return Array.from(new Set(uniqueTags));
+  }
 }
