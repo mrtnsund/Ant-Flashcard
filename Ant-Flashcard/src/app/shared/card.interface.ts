@@ -5,4 +5,5 @@ export interface ICard {
   tags: string[];
   date: string;
   success: number;
+  user?: string;
 }

@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICard } from '../shared/card.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
   configUrl = 'http://localhost:3001/api/flashcards';
+  token;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
 
   }
+
 
   getCards(): Observable<ICard[]> {
     return this.http.get<ICard[]>(this.configUrl);
   }
   addCard(newCard: ICard): Observable<ICard> {
+    if (newCard.tags === null) {
+      newCard.tags = [];
+    }
+    newCard.user = this.authService.getAccessToken();
     console.log(newCard);
     return this.http.post<ICard>(this.configUrl, newCard);
   }

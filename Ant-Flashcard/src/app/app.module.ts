@@ -7,7 +7,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { nb_NO } from 'ng-zorro-antd/i18n';
@@ -33,6 +33,7 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { RandomComponent } from './review/random/random.component';
 import { CustomComponent } from './review/custom/custom.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 registerLocaleData(nb);
 
 @NgModule({
@@ -70,6 +71,11 @@ registerLocaleData(nb);
   ],
   providers: [
     { provide: NZ_I18N, useValue: nb_NO },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     CardService,
     AuthService,
     DatePipe,

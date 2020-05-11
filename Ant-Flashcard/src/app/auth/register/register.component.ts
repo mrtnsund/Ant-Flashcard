@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
         username: 'test',
         email: this.validateForm.controls['email'].value,
         password: this.validateForm.controls['password'].value,
+        cards: [],
       }
       this.authService.register(user);
     }

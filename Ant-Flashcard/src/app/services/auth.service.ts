@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { IUser } from '../shared/user.interface';
+import { CardService } from './card.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,14 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(private http: HttpClient, public router: Router, private cardService: CardService) {
 
   }
 
   register(user: IUser) {
     return this.http.post(`${this.configUrl}/signup`, user)
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
+        localStorage.setItem('authorization', res.token);
         this.router.navigate(['/home']);
       });
   }
@@ -27,22 +28,24 @@ export class AuthService {
   login(user: IUser) {
     return this.http.post<any>(`${this.configUrl}/login`, user)
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
+        localStorage.setItem('authorization', res.token);
         this.router.navigate(['/home']);
       });
   }
 
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    const token = localStorage.getItem('authorization');
+    console.log(token);
+    return token;
   }
 
   isLoggedIn(): boolean {
-    const authToken = localStorage.getItem('access_token');
+    const authToken = localStorage.getItem('authorization');
     return (authToken !== null) ? true : false;
   }
 
   logout() {
-    if (localStorage.removeItem('access_token') === null) {
+    if (localStorage.removeItem('authorization') === null) {
       this.router.navigate(['/login']);
     }
   }
