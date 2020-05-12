@@ -9,7 +9,7 @@ import { CardService } from './card.service';
   providedIn: 'root'
 })
 export class AuthService {
-  configUrl = 'http://localhost:3001/user';
+  configUrl = 'http://mrtnsund.serverless.social/user';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
