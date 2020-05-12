@@ -19,30 +19,32 @@
           <div class="upper">
           </div>
           <div class="lower">
-            <p>You have 13 cards due</p>
+            <p>You have {{ noOfDueCards }} cards due</p>
             <h3>Today</h3>
           </div>
         </a>
       </div>
       <div class="card">
-        <a [routerLink]="['/shuffle']">
-          <div class="upper">
+        <!-- <a [routerLink]="['/shuffle']"> -->
+          <div class="upper kommer" style="padding-top: 0px; text-align: center; color:black; font-size: 10px;">
+            coming soon
           </div>
           <div class="lower">
             <p>Random</p>
             <h3>5 Minute Shuffle</h3>
           </div>
-        </a>
+        <!-- </a> -->
       </div>
       <div class="card">
-        <a [routerLink]="['/custom']">
-          <div class="upper">
+        <!-- <a [routerLink]="['/custom']"> -->
+          <div class="upper kommer" style="padding-top: 0px; text-align: center; color:black; font-size: 10px;">
+            coming soon          
           </div>
           <div class="lower">
             <p>Preparing for a test?</p>
             <h3>Custom study</h3>
           </div>
-        </a>
+        <!-- </a> -->
       </div>
     </div>
     <div class="add">
@@ -52,6 +54,9 @@
 </div>
 
 <style>
+  .kommer {
+    background-color: grey !important;
+  }
 
   .greeting {
     margin-top: 100px;

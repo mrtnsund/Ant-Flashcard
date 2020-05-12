@@ -10,22 +10,35 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
-
+  error;
   constructor(
     private fb: FormBuilder,
     public authService: AuthService,
     public router: Router
   ) {
+    this.error = '';
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home']);
     }
   }
   submitForm(): void {
+    // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.authService.login(this.validateForm.value);
+    if (this.validateForm.controls.email.value && this.validateForm.controls.password.value) {
+      this.authService
+        .login(this.validateForm.value)
+        .subscribe((res: any) => {
+          localStorage.setItem('authorization', res.token);
+          this.router.navigate(['/home']);
+        },
+        err => {
+          alert(err.error.error);
+        });
+
+    }
   }
 
   ngOnInit(): void {

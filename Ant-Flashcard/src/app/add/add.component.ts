@@ -64,15 +64,25 @@ export class AddComponent implements OnInit {
       date: this.dateService.transformDate(new Date()),
       success: 0,
     };
-    this.notification.blank(
-      'Card added',
-      '',
-      {nzPlacement: 'bottomRight'},
-    );
-    this.cardService.addCard(newCard).subscribe();
-    this.addCardForm.reset({
-      tags: this.addCardForm.get('tags').value
-    });
+    if (card.question && card.answer) {
+      this.notification.create(
+        'success',
+        'Card added',
+        '',
+        {nzPlacement: 'bottomRight'},
+      );
+      this.cardService.addCard(newCard).subscribe();
+      this.addCardForm.reset({
+        tags: this.addCardForm.get('tags').value
+      });
+    } else {
+      this.notification.create(
+        'error',
+        'Please enter a question and answer',
+        '',
+        {nzPlacement: 'bottomLeft'}
+      );
+    }
   }
   logout(): void {
     this.authService.logout();

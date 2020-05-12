@@ -11,6 +11,7 @@ import { IUser } from 'src/app/shared/user.interface';
 })
 export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
+  errors = '';
 
   constructor(
     private fb: FormBuilder,
@@ -22,18 +23,38 @@ export class RegisterComponent implements OnInit {
     }
   }
   submitForm(): void {
+    // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    if ((this.validateForm.controls['password'].value === this.validateForm.controls['passwordRepeat'].value)) {
-      const user: IUser = {
-        username: 'test',
-        email: this.validateForm.controls['email'].value,
-        password: this.validateForm.controls['password'].value,
-        cards: [],
+    const email = this.validateForm.controls.email.value;
+    const password = this.validateForm.controls.password.value;
+    const passwordRepeat = this.validateForm.controls.passwordRepeat.value;
+
+    if (email && password && passwordRepeat) {
+      if ((password === passwordRepeat)) {
+        const user: IUser = {
+          username: '',
+          email,
+          password,
+          cards: [],
+        };
+
+        this.authService
+          .register(user)
+          .subscribe(
+            (res: any) => {
+            localStorage.setItem('authorization', res.token);
+            this.router.navigate(['/home']);
+            },
+          err => {
+            alert(err.error.error);
+          }
+          );
+      } else {
+          alert('Password does not match');
       }
-      this.authService.register(user);
     }
   }
 

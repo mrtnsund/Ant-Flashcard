@@ -18,19 +18,11 @@ export class AuthService {
   }
 
   register(user: IUser) {
-    return this.http.post(`${this.configUrl}/signup`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('authorization', res.token);
-        this.router.navigate(['/home']);
-      });
+    return this.http.post(`${this.configUrl}/signup`, user);
   }
 
   login(user: IUser) {
-    return this.http.post<any>(`${this.configUrl}/login`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('authorization', res.token);
-        this.router.navigate(['/home']);
-      });
+    return this.http.post<any>(`${this.configUrl}/login`, user);
   }
 
   getAccessToken() {

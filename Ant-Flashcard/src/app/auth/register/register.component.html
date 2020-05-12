@@ -2,6 +2,7 @@
 <div class="container">
   <h1 nz-typography>Register</h1>
   <p>Please register an account below to start creating cards</p>
+  <p style="color: rgb(253, 90, 90)">  {{errors}} </p>
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your email!">

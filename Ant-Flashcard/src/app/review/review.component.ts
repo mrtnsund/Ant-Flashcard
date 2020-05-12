@@ -19,6 +19,7 @@ export class ReviewComponent implements OnInit {
   revealAnswer: boolean;
   progressPercent: number;
   loaded: boolean = false;
+  today;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +32,7 @@ export class ReviewComponent implements OnInit {
     this.cardService.getCards().subscribe(cards => {
       this.cards = cards;
       this.index = 0;
+      this.today = this.dateService.transformDate(new Date());
       this.dueCards = this.getDueCards();
       this.cardToDisplay = this.dueCards[this.index];
       this.progressPercent = 1 / this.dueCards.length * 100;
@@ -43,8 +45,7 @@ export class ReviewComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   getDueCards(): ICard[] {
-    const today = this.dateService.transformDate(new Date());
-    return this.cards.filter(card => (card.date <= today));
+    return this.cards.filter(card => (card.date <= this.today));
   }
   againClick(): void {
     const card = this.dueCards[this.index];
@@ -53,16 +54,22 @@ export class ReviewComponent implements OnInit {
   }
   easyClick(): void {
     const card = this.dueCards[this.index];
+    const newDate = new Date();
+    card.date = this.dateService.transformDate(newDate.setDate(newDate.getDate() + 5));
     this.cardService.updateCard(card).subscribe();
     this.nextCard();
   }
   mediumClick(): void {
     const card = this.dueCards[this.index];
+    const newDate = new Date();
+    card.date = this.dateService.transformDate(newDate.setDate(newDate.getDate() + 3));
     this.cardService.updateCard(card).subscribe();
     this.nextCard();
   }
   hardClick(): void {
     const card = this.dueCards[this.index];
+    const newDate = new Date();
+    card.date = this.dateService.transformDate(newDate.setDate(newDate.getDate() + 1));
     this.cardService.updateCard(card).subscribe();
     this.nextCard();
   }
