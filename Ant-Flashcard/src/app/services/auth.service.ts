@@ -13,7 +13,7 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
-  constructor(private http: HttpClient, public router: Router, private cardService: CardService) {
+  constructor(private http: HttpClient, public router: Router) {
 
   }
 
@@ -35,12 +35,11 @@ export class AuthService {
 
   getAccessToken() {
     const token = localStorage.getItem('authorization');
-    console.log(token);
     return token;
   }
 
   isLoggedIn(): boolean {
-    const authToken = localStorage.getItem('authorization');
+    const authToken = this.getAccessToken();
     return (authToken !== null) ? true : false;
   }
 

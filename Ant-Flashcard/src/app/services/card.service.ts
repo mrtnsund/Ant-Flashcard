@@ -24,7 +24,6 @@ export class CardService {
       newCard.tags = [];
     }
     newCard.user = this.authService.getAccessToken();
-    console.log(newCard);
     return this.http.post<ICard>(this.configUrl, newCard);
   }
   updateCard(updatedCard: ICard): Observable<ICard> {
