@@ -38,5 +38,8 @@ export class HomeComponent implements OnInit {
     if (this.cards.length >= 1) {
       this.noOfDueCards = this.cards.filter(card => card.date === today).length;
     }
+    if (this.noOfDueCards === 0) {
+      this.noOfDueCards = 'no';
+    }
   }
 }
