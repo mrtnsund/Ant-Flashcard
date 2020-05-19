@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CardService } from '../../services/card.service';
-import { DateService } from '../../services/date.service';
 import { ICard } from '../../shared/card.interface';
+import { timer } from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-random',
@@ -11,20 +12,23 @@ import { ICard } from '../../shared/card.interface';
   styleUrls: ['./random.component.css']
 })
 export class RandomComponent implements OnInit {
-  size = 'large';
   cardToDisplay: ICard;
   cards: ICard[];
   index: number;
   dueCards: ICard[];
   revealAnswer: boolean;
   progressPercent: number;
-  loaded: boolean = false;
+  subscribeTimer: number;
+  totalTime: number;
+  timeLeft: number;
+  size = 'large';
+  loaded = false;
+
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private cardService: CardService,
-    private dateService: DateService,
   ) { }
 
   ngOnInit(): void {
@@ -33,10 +37,22 @@ export class RandomComponent implements OnInit {
       this.index = 0;
       this.dueCards = this.getDueCards();
       this.cardToDisplay = this.dueCards[this.index];
-      this.progressPercent = 1 / this.dueCards.length * 100;
       this.loaded = true;
+      this.totalTime = 300;
+      this.progressPercent = 100;
       this.timer();
     });
+  }
+  timer(): void {
+    const source = timer(1000, 1000);
+    this.timeLeft = this.totalTime;
+    source.subscribe(value => {
+      if (value <= 300 && this.timeLeft >= 0) {
+        this.timeLeft = this.totalTime - value;
+        this.progressPercent = this.timeLeft / 3;
+      }
+    });
+
   }
 
   logout(): void {
@@ -44,8 +60,7 @@ export class RandomComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   getDueCards(): ICard[] {
-    const today = this.dateService.transformDate(new Date());
-    return this.cards.filter(card => (card.date <= today));
+    return _.shuffle(this.cards);
   }
   againClick(): void {
     const card = this.dueCards[this.index];
@@ -71,7 +86,6 @@ export class RandomComponent implements OnInit {
     this.revealAnswer = false;
     this.index++;
     this.cardToDisplay = this.dueCards[this.index];
-    this.progressPercent = this.index / this.dueCards.length * 100;
   }
   toggleAnswer(): void {
     this.revealAnswer = true;

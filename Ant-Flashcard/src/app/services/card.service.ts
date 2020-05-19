@@ -8,7 +8,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CardService {
-  configUrl = 'http://mrtnsund.serverless.social/api/flashcards';
+  // configUrl = 'http://mrtnsund.serverless.social/api/flashcards';
+  configUrl = 'http://localhost:3001/api/flashcards';
+
   token;
 
   constructor(private http: HttpClient, private authService: AuthService) {
