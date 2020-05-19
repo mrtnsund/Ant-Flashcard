@@ -35,6 +35,7 @@ export class RandomComponent implements OnInit {
       this.cardToDisplay = this.dueCards[this.index];
       this.progressPercent = 1 / this.dueCards.length * 100;
       this.loaded = true;
+      this.timer();
     });
   }
 
