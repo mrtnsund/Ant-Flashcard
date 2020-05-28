@@ -1,20 +1,24 @@
 
 <div class="header">
-  <div class="left"><a [routerLink]="['/home']"><i nz-icon nzType="left" nzTheme="outline"></i>Back</a></div>
+  <div class="left">
+    <a [routerLink]="['/home']"><i nz-icon nzType="left" nzTheme="outline"></i>Back</a>
+  </div>
   <div class="right">
     <p (click)="logout()">Logout</p>
   </div>
 </div>
 
-<div class="select" *ngIf="!selectedTags; else showBlock">
-  <form [formGroup]="selectTagForm" (ngSubmit)="selectTag(selectTagForm.value)">
-  <nz-select nzMode="tags" [nzTokenSeparators]="[',']" nzPlaceHolder="Select tags to include in your study" formControlName="tags">
-    <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
-  </nz-select>
-  <button id="submitBtn" nz-button nzType="default" type="submit">Confirm</button>
-  </form>
-</div>
 
+<div class="container">
+  <div class="select" *ngIf="!selectedTags; else showBlock">
+    <form [formGroup]="selectTagForm" (ngSubmit)="selectTag(selectTagForm.value)">
+    <nz-select nzMode="tags" [nzTokenSeparators]="[',']" nzPlaceHolder="Select tags to include in your study" formControlName="tags" style="width:250px">
+      <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+    <button id="submitBtn" nz-button nzType="default" type="submit" style="margin-top: 30px;">Confirm</button>
+    </form>
+  </div>
+</div>
 <ng-template #showBlock>
 <div class="container" *ngIf="loaded; else loadingBlock">
   <div class="content">
@@ -35,30 +39,28 @@
             <p>
               {{ cardToDisplay.answer }}
             </p>
-            <div class="tags" *ngFor="let tag of cardToDisplay.tags">
-              <nz-tag>{{ tag }}</nz-tag>
-            </div>
           </div>
           <div class="revealButton" (click)="toggleAnswer()" *ngIf="!revealAnswer; else revealBlock">
             <p>
-              SEE ANSWER
+              <span nz-tooltip nzTooltipTitle="See answer (SPACE)" nzTooltipPlacement="bottom">SEE ANSWER</span>
             </p>
           </div>
       </div>
       
       <ng-template #revealBlock>
         <div class="buttons">
-          <div class="button againButton" (click)="againClick()">AGAIN </div>
-          <div class="button easyButton" (click)="easyClick()">EASY </div>
-          <div class="button mediumButton" (click)="mediumClick()">MEDIUM </div>
-          <div class="button hardButton" (click)="hardClick()">HARD </div>
+          <div class="button againButton" (click)="nextCard()"><span nz-tooltip nzTooltipTitle="Next card (SPACE)" nzTooltipPlacement="bottom">NEXT</span>
+          </div>
+          <!-- <div class="button easyButton" (click)="nextCard()">EASY </div>
+          <div class="button mediumButton" (click)="nextCard()">MEDIUM </div>
+          <div class="button hardButton" (click)="nextCard()">HARD </div> -->
         </div>
       </ng-template>
 
 
       <!-- Else -->
       <ng-template #elseBlock>
-        <p style="text-align: center;">You're all caught up, good job!</p>
+        <p style="text-align: center;">Custom study complete! <a href="/home" style="color:#34DA74; font-weight: bold;">Go back?</a></p>
       </ng-template>
 
     </div>
@@ -77,6 +79,11 @@
 </ng-template>
 
 <style>
+  .select {
+    padding-top: 100px;
+    width: 250px;
+    text-align: center;
+  }
   .loader {
     margin-top: 300px;
   }
@@ -205,13 +212,7 @@
     cursor: pointer;
   } 
   .againButton {
-    color: red;
-  }
-  .mediumButton {
-    color: #FFC400;
-  }
-  .hardButton {
-    color: #FF9100;
+    color: #34DA74;
   }
   .revealButton {
     text-align: center;

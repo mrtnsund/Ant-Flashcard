@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CardService } from '../../services/card.service';
 import { ICard } from '../../shared/card.interface';
 import { timer } from 'rxjs';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import * as _ from 'lodash';
 
 @Component({
@@ -29,7 +30,17 @@ export class RandomComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cardService: CardService,
-  ) { }
+    private _hotkeysService: HotkeysService,
+  ) {
+    this._hotkeysService.add(new Hotkey('space', (event: KeyboardEvent): boolean => {
+      if (this.revealAnswer) {
+        this.nextCard();
+      } else {
+        this.toggleAnswer();
+      }
+      return false;
+    }));
+  }
 
   ngOnInit(): void {
     this.cardService.getCards().subscribe(cards => {
@@ -42,6 +53,7 @@ export class RandomComponent implements OnInit {
       this.progressPercent = 100;
       this.timer();
     });
+ 
   }
   timer(): void {
     const source = timer(1000, 1000);
@@ -61,26 +73,6 @@ export class RandomComponent implements OnInit {
   }
   getDueCards(): ICard[] {
     return _.shuffle(this.cards);
-  }
-  againClick(): void {
-    const card = this.dueCards[this.index];
-    this.dueCards.push(card);
-    this.nextCard();
-  }
-  easyClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
-  }
-  mediumClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
-  }
-  hardClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
   }
   nextCard(): void {
     this.revealAnswer = false;

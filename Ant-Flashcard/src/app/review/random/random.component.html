@@ -25,35 +25,29 @@
             <p>
               {{ cardToDisplay.answer }}
             </p>
-            <div class="tags" *ngFor="let tag of cardToDisplay.tags">
-              <nz-tag>{{ tag }}</nz-tag>
-            </div>
           </div>
           <div class="revealButton" (click)="toggleAnswer()" *ngIf="!revealAnswer; else revealBlock">
             <p>
-              SEE ANSWER
+              <span nz-tooltip nzTooltipTitle="See answer (SPACE)" nzTooltipPlacement="bottom">SEE ANSWER</span>
             </p>
           </div>
       </div>
       
       <ng-template #revealBlock>
         <div class="buttons">
-          <div class="button againButton" (click)="againClick()">AGAIN </div>
-          <div class="button easyButton" (click)="easyClick()">EASY </div>
-          <div class="button mediumButton" (click)="mediumClick()">MEDIUM </div>
-          <div class="button hardButton" (click)="hardClick()">HARD </div>
+          <div class="button againButton" (click)="nextCard()"><span nz-tooltip nzTooltipTitle="Next card (SPACE)" nzTooltipPlacement="bottom">NEXT</span></div>
         </div>
       </ng-template>
 
 
       <!-- Else -->
       <ng-template #elseBlock>
-        <p style="text-align: center;">You're all caught up, good job!</p>
+        <div class="container">
+          <p style="text-align: center;">Time's up! <a href="/home" style="color:#34DA74; font-weight: bold;">Go back?</a></p>
+        </div>
       </ng-template>
 
     </div>
-    
-
     </div>
   </div>
 
@@ -194,13 +188,7 @@
     cursor: pointer;
   } 
   .againButton {
-    color: red;
-  }
-  .mediumButton {
-    color: #FFC400;
-  }
-  .hardButton {
-    color: #FF9100;
+    color: #34DA74;
   }
   .revealButton {
     text-align: center;

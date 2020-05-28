@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CardService } from '../services/card.service';
 import { DateService } from '../services/date.service';
 import { ICard } from '../shared/card.interface';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Component({
   selector: 'app-review',
@@ -26,7 +27,33 @@ export class ReviewComponent implements OnInit {
     private router: Router,
     private cardService: CardService,
     private dateService: DateService,
-  ) { }
+    private _hotkeysService: HotkeysService
+  ) {
+      this._hotkeysService.add(new Hotkey('1', (event: KeyboardEvent): boolean => {
+        this.againClick();
+        return false;
+      }));
+      this._hotkeysService.add(new Hotkey('2', (event: KeyboardEvent): boolean => {
+        this.easyClick();
+        return false;
+      }));
+      this._hotkeysService.add(new Hotkey('3', (event: KeyboardEvent): boolean => {
+        this.mediumClick();
+        return false;
+      }));
+      this._hotkeysService.add(new Hotkey('4', (event: KeyboardEvent): boolean => {
+        this.hardClick();
+        return false;
+      }));
+      this._hotkeysService.add(new Hotkey('space', (event: KeyboardEvent): boolean => {
+        if (this.revealAnswer) {
+          this.easyClick();
+        } else {
+          this.toggleAnswer();
+        }
+        return false;
+      }));
+    }
 
   ngOnInit(): void {
     this.cardService.getCards().subscribe(cards => {

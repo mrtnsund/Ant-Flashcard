@@ -25,23 +25,20 @@
             <p>
               {{ cardToDisplay.answer }}
             </p>
-            <div class="tags" *ngFor="let tag of cardToDisplay.tags">
-              <nz-tag>{{ tag }}</nz-tag>
-            </div>
           </div>
           <div class="revealButton" (click)="toggleAnswer()" *ngIf="!revealAnswer; else revealBlock">
             <p>
-              SEE ANSWER
+              <span nz-tooltip nzTooltipTitle="See answer (SPACE)" nzTooltipPlacement="bottom">SEE ANSWER</span>
             </p>
           </div>
       </div>
       
       <ng-template #revealBlock>
         <div class="buttons">
-          <div class="button againButton" (click)="againClick()">AGAIN </div>
-          <div class="button easyButton" (click)="easyClick()">EASY </div>
-          <div class="button mediumButton" (click)="mediumClick()">MEDIUM </div>
-          <div class="button hardButton" (click)="hardClick()">HARD </div>
+          <div class="button againButton" (click)="againClick()"> <span nz-tooltip nzTooltipTitle="Try again (1)" nzTooltipPlacement="bottomLeft">AGAIN</span></div>
+          <div class="button easyButton" (click)="easyClick()"><span nz-tooltip nzTooltipTitle="Effortless (SPACE || 2)" nzTooltipPlacement="bottom">EASY</span> </div>
+          <div class="button mediumButton" (click)="mediumClick()"><span nz-tooltip nzTooltipTitle="Could be better (3)" nzTooltipPlacement="bottom">MEDIUM</span> </div>
+          <div class="button hardButton" (click)="hardClick()"><span nz-tooltip nzTooltipTitle="Need to freshen up (4)" nzTooltipPlacement="bottomRight">HARD</span> </div>
         </div>
       </ng-template>
 

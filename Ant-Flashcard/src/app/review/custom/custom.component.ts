@@ -5,6 +5,7 @@ import { CardService } from '../../services/card.service';
 import { DateService } from '../../services/date.service';
 import { ICard } from '../../shared/card.interface';
 import { FormBuilder } from '@angular/forms';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import * as _ from 'lodash';
 
 
@@ -34,11 +35,20 @@ export class CustomComponent implements OnInit {
     private router: Router,
     private cardService: CardService,
     private dateService: DateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _hotkeysService: HotkeysService
   ) {
     this.selectTagForm = this.formBuilder.group({
       tags: []
     });
+    this._hotkeysService.add(new Hotkey('space', (event: KeyboardEvent): boolean => {
+      if (this.revealAnswer) {
+        this.nextCard();
+      } else {
+        this.toggleAnswer();
+      }
+      return false;
+    }));
   }
 
   ngOnInit(): void {
@@ -57,26 +67,6 @@ export class CustomComponent implements OnInit {
   }
   getDueCards(): ICard[] {
     return this.cards.filter(card => (card.tags.some((val) => this.selectedTags.indexOf(val) !== -1)));
-  }
-  againClick(): void {
-    const card = this.dueCards[this.index];
-    this.dueCards.push(card);
-    this.nextCard();
-  }
-  easyClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
-  }
-  mediumClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
-  }
-  hardClick(): void {
-    const card = this.dueCards[this.index];
-    this.cardService.updateCard(card).subscribe();
-    this.nextCard();
   }
   nextCard(): void {
     this.revealAnswer = false;

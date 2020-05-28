@@ -34,6 +34,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { RandomComponent } from './review/random/random.component';
 import { CustomComponent } from './review/custom/custom.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { HotkeyModule } from 'angular2-hotkeys';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 registerLocaleData(nb);
 
 @NgModule({
@@ -56,6 +58,7 @@ registerLocaleData(nb);
     IconsProviderModule,
     FormsModule,
     ReactiveFormsModule,
+    HotkeyModule.forRoot(),
     // NG ZORRO
     NzLayoutModule,
     NzMenuModule,
@@ -67,7 +70,8 @@ registerLocaleData(nb);
     NzTagModule,
     NzNotificationModule,
     NzProgressModule,
-    NzSpinModule
+    NzSpinModule,
+    NzToolTipModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: nb_NO },
@@ -79,7 +83,7 @@ registerLocaleData(nb);
     CardService,
     AuthService,
     DatePipe,
-    DateService
+    DateService,
   ],
   bootstrap: [AppComponent]
 })
