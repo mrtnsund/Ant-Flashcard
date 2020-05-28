@@ -1,0 +1,53 @@
+<div class="container" *ngIf="loaded; else loadingBlock">
+  <div class="content">
+    <div class="greeting">
+      <h1 style="text-align: center;">Today</h1>
+      <p style="text-align: center;" *ngIf="dueCards && index < dueCards.length">{{index+1}} out of {{ dueCards.length }} cards</p>
+    </div>
+
+      <div class="cards">
+        <div *ngIf="cardToDisplay; else elseBlock"  class="card">
+            <div class="upper">
+                <nz-progress [nzPercent]="progressPercent" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"  [nzShowInfo]="false"></nz-progress>
+                <div class="question center">
+                  <h2>{{ cardToDisplay.question }}</h2>
+                </div>
+            </div>
+            <div class="answer lower" *ngIf="revealAnswer">
+              <p>
+                {{ cardToDisplay.answer }}
+              </p>
+            </div>
+            <div class="revealButton" (click)="toggleAnswer()" *ngIf="!revealAnswer; else revealBlock">
+              <p>
+                <span nz-tooltip nzTooltipTitle="See answer (SPACE)" nzTooltipPlacement="bottom">SEE ANSWER</span>
+              </p>
+            </div>
+        </div>
+        
+        <ng-template #revealBlock>
+          <div class="buttons">
+            <div class="button againButton" (click)="againClick()"> <span nz-tooltip nzTooltipTitle="Try again (1)" nzTooltipPlacement="bottomLeft">AGAIN</span></div>
+            <div class="button easyButton" (click)="easyClick()"><span nz-tooltip nzTooltipTitle="Effortless (SPACE || 2)" nzTooltipPlacement="bottom">EASY</span> </div>
+            <div class="button mediumButton" (click)="mediumClick()"><span nz-tooltip nzTooltipTitle="Could be better (3)" nzTooltipPlacement="bottom">MEDIUM</span> </div>
+            <div class="button hardButton" (click)="hardClick()"><span nz-tooltip nzTooltipTitle="Need to freshen up (4)" nzTooltipPlacement="bottomRight">HARD</span> </div>
+          </div>
+        </ng-template>
+
+
+        <!-- Else -->
+        <ng-template #elseBlock>
+          <p style="text-align: center;">You're all caught up, good job!  <a [routerLink]="['/home']" style="color:#34DA74; font-weight: bold;">Go back?</a></p>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loadingBlock>
+    <div class="container">
+      <div class="loader">
+        <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+      </div>
+    </div>
+  </ng-template>
