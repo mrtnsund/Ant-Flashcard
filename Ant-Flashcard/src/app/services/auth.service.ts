@@ -10,7 +10,7 @@ import { CardService } from './card.service';
 })
 export class AuthService {
   // configUrl = 'http://mrtnsund.serverless.social/user';
-    configUrl = 'https://ng-flashcard-backend-34ldejp67.now.sh/user';
+    configUrl = 'http://localhost:3001/user';
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
@@ -19,6 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient, public router: Router) {
 
   }
+
 
   register(user: IUser) {
     return this.http.post(`${this.configUrl}/signup`, user);
