@@ -1,3 +1,5 @@
+<app-header class="fw"></app-header>
+
 <div class="container">
   <div class="select" *ngIf="!selectedTags; else showBlock">
     <form [formGroup]="selectTagForm" (ngSubmit)="selectTag(selectTagForm.value)">
