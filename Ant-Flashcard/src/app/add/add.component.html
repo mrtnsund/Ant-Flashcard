@@ -1,12 +1,3 @@
-
-
-<div class="header">
-  <div class="left"><a [routerLink]="['/home']"><i nz-icon nzType="left" nzTheme="outline"></i>Back</a></div>
-  <div class="right">
-    <p (click)="logout()">Logout</p>
-  </div>
-</div>
-
 <div class="container">
   <div class="content">
     <div class="greeting">
@@ -17,8 +8,8 @@
         <div class="upper">
           <form id="addCardForm" [formGroup]="addCardForm" (ngSubmit)="onSubmit(addCardForm.value)">
 
-            <textarea class="question" nz-input placeholder="Question" [nzAutosize]="{ minRows: 3, maxRows: 5 }" formControlName="question" style="height: 100px;"></textarea>
-            <textarea nz-input placeholder="Answer" [nzAutosize]="{ minRows: 3, maxRows: 5 }" formControlName="answer"></textarea>
+            <textarea class="question" nz-input placeholder="Question" [nzAutosize]="{ minRows: 3, maxRows: 3 }" formControlName="question" style="height: 100px;"></textarea>
+            <textarea class="answer" nz-input placeholder="Answer" [nzAutosize]="{ minRows: 3, maxRows: 3 }" formControlName="answer"></textarea>
           
             <nz-select class="test" [nzSize]="size" nzMode="tags" nzPlaceHolder="Select tags" formControlName="tags">
               <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
@@ -40,6 +31,18 @@
 
 
 <style>
+  .question {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+    width: 90%;
+  }
+  .answer {
+    margin-top: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+  }
 
     .revealButton {
     text-align: center;
@@ -49,10 +52,13 @@
     width: 100%;
     position: absolute;
     bottom: 0;
+    background-color: #34DA74;
+    color: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
   .revealButton:hover {
     cursor: pointer;
-    font-size: 16px;
   }
   .revealButton p {
     font-weight: 600;
@@ -72,7 +78,6 @@
     height: 300px;
   }
   .upper {
-    background: #F5F5F5;  /* fallback for old browsers */
     height: 95px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -109,7 +114,7 @@
     flex-wrap: wrap;
     background-color: #EBEFF5 !important;
     width: 100vw;
-    height: 90vh;
+    height: calc(100vh - 100px);
   }
 
   .header {
@@ -153,4 +158,5 @@
       height: 312px;
       margin: 2px;
     }
+  }
 </style>

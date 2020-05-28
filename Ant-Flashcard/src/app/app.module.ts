@@ -36,6 +36,7 @@ import { CustomComponent } from './review/custom/custom.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HotkeyModule } from 'angular2-hotkeys';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { HeaderComponent } from './header/header.component';
 registerLocaleData(nb);
 
 @NgModule({
@@ -48,7 +49,8 @@ registerLocaleData(nb);
     ReviewComponent,
     AddComponent,
     RandomComponent,
-    CustomComponent
+    CustomComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
