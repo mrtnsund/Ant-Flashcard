@@ -26,7 +26,7 @@ export class CustomComponent implements OnInit {
   revealAnswer: boolean;
   progressPercent: number;
   loaded: boolean = false;
-  selectedTag;
+  selectedTags;
   selectTagForm;
 
   constructor(
@@ -48,7 +48,6 @@ export class CustomComponent implements OnInit {
       // this.progressPercent = 1 / this.dueCards.length * 100;
       this.loaded = true;
       this.listOfOption = this.getExistingTags();
-
     });
   }
 
@@ -57,7 +56,7 @@ export class CustomComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   getDueCards(): ICard[] {
-    return this.cards.filter(card => (card.tags.includes(this.selectedTag)));
+    return this.cards.filter(card => (card.tags.some((val) => this.selectedTags.indexOf(val) !== -1)));
   }
   againClick(): void {
     const card = this.dueCards[this.index];
@@ -89,7 +88,8 @@ export class CustomComponent implements OnInit {
     this.revealAnswer = true;
   }
   selectTag(tag): void {
-    this.selectedTag = tag;
+    this.selectedTags = tag.tags;
+    console.log(tag.tags)
     this.dueCards = this.getDueCards();
     this.cardToDisplay = this.dueCards[this.index];
 

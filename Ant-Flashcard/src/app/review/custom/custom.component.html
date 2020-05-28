@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div class="select" *ngIf="!selectedTag; else showBlock">
+<div class="select" *ngIf="!selectedTags; else showBlock">
   <form [formGroup]="selectTagForm" (ngSubmit)="selectTag(selectTagForm.value)">
   <nz-select nzMode="tags" [nzTokenSeparators]="[',']" nzPlaceHolder="Select tags to include in your study" formControlName="tags">
     <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
@@ -19,7 +19,7 @@
 <div class="container" *ngIf="loaded; else loadingBlock">
   <div class="content">
     <div class="greeting">
-      <h1 style="text-align: center;">Today</h1>
+      <h1 style="text-align: center;">Custom</h1>
       <p style="text-align: center;" *ngIf="dueCards && index < dueCards.length">{{index+1}} out of {{ dueCards.length }} cards</p>
     </div>
 
