@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   getNoOfDueCards() {
     const today = this.dateService.transformDate(new Date());
     if (this.cards.length >= 1) {
-      this.noOfDueCards = this.cards.filter(card => card.date === today).length;
+      this.noOfDueCards = this.cards.filter(card => card.date <= today).length;
     }
     if (this.noOfDueCards === 0) {
       this.noOfDueCards = 'no';

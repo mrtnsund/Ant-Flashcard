@@ -48,14 +48,14 @@ export class ReviewComponent implements OnInit {
     return this.cards.filter(card => (card.date <= this.today));
   }
   againClick(): void {
-    const card = this.dueCards[this.index];
-    this.dueCards.push(card);
+    // const card = this.dueCards[this.index];
+    // this.dueCards.push(card);
     this.nextCard();
   }
   easyClick(): void {
     const card = this.dueCards[this.index];
     const newDate = new Date();
-    card.date = this.dateService.transformDate(newDate.setDate(newDate.getDate() + 5));
+    card.date = this.dateService.transformDate(newDate.setDate(newDate.getDate() + 4));
     this.cardService.updateCard(card).subscribe();
     this.nextCard();
   }

@@ -14,6 +14,7 @@ export class AuthService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
+  erServerOppe: boolean;
 
   constructor(private http: HttpClient, public router: Router) {
 
