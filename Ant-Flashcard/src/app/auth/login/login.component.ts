@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { timeout } from 'rxjs/operators';
+import { TimeoutError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    private notification: NzNotificationService,
+
   ) {
     this.error = '';
     if (this.authService.isLoggedIn()) {
@@ -30,14 +35,28 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.controls.email.value && this.validateForm.controls.password.value) {
       this.authService
         .login(this.validateForm.value)
+        .pipe(timeout(5000))
         .subscribe((res: any) => {
           localStorage.setItem('authorization', res.token);
           this.router.navigate(['/home']);
         },
         err => {
-          alert(err.error.error);
+          if (err instanceof TimeoutError) {
+            this.notification.create(
+              'error',
+              'Server taking too long to respond',
+              '',
+              {nzPlacement: 'bottomRight'},
+            );
+          } else {
+            this.notification.create(
+              'error',
+              `${err.message}`,
+              '',
+              {nzPlacement: 'bottomRight'},
+            );
+          }
         });
-
     }
   }
 
