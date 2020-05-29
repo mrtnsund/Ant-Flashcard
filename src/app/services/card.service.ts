@@ -8,8 +8,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CardService {
-  // configUrl = 'http://mrtnsund.serverless.social/api/flashcards';
-  configUrl = 'http://localhost:3001/api/flashcards';
+  configUrl = 'https://pi-7a130fdb.localhost.run/api/flashcards'; //RASPBERRY PI
 
   token;
 

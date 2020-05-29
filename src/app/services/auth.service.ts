@@ -9,9 +9,8 @@ import { CardService } from './card.service';
   providedIn: 'root'
 })
 export class AuthService {
-  // configUrl = 'http://mrtnsund.serverless.social/user';
-    configUrl = 'http://localhost:3001/user';
-
+    configUrl = 'https://pi-7a130fdb.localhost.run/user'; //RASPBERRY PI
+ 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   erServerOppe: boolean;
