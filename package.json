@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href=\"https:\/\/mrtnsund.github.io\/NgFlashCard\/\"",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
-
+    "e2e": "ng e2e",
+    "githubpage": "ng build --prod --base-href \"https:\/\/mrtnsund.github.io\/NgFlashcard\/\""
   },
   "private": true,
   "dependencies": {
