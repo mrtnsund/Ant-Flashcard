@@ -64,13 +64,23 @@ export class AddComponent implements OnInit {
       success: 0,
     };
     if (card.question && card.answer) {
-      this.notification.create(
-        'success',
-        'Card added',
-        '',
-        {nzPlacement: 'bottomRight'},
+      this.cardService.addCard(newCard).subscribe(() => {
+        this.notification.create(
+          'success',
+          'Card added',
+          '',
+          {nzPlacement: 'bottomRight'},
+        );
+      },
+      err => {
+        this.notification.create(
+          'error',
+          err.error.error,
+          '',
+          {nzPlacement: 'bottomRight'}
+        );
+      }
       );
-      this.cardService.addCard(newCard).subscribe();
       this.addCardForm.reset({
         tags: this.addCardForm.get('tags').value
       });
@@ -79,7 +89,7 @@ export class AddComponent implements OnInit {
         'error',
         'Please enter a question and answer',
         '',
-        {nzPlacement: 'bottomLeft'}
+        {nzPlacement: 'bottomRight'}
       );
     }
   }
