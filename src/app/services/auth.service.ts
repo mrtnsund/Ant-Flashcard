@@ -57,6 +57,18 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
   }
+  isTokenValid() {
+    const token = this.getAccessToken();
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    // tslint:disable-next-line: new-parens
+    const now = Math.floor((new Date).getTime()) / 1000;
+
+    if (now >= expiry) {
+      this.logout();
+      return false;
+    }
+    return true;
+  }
 
   public isAuthenticated(): boolean {
     const userData = localStorage.getItem('userInfo');

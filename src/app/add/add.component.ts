@@ -52,7 +52,6 @@ export class AddComponent implements OnInit {
     }
 
     const uniqueTags = _.uniqBy(allTags, 'label');
-    console.log(uniqueTags);
     return uniqueTags;
     // return Array.from(new Set(uniqueTags));
   }
