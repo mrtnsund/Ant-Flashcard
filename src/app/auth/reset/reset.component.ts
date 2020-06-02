@@ -37,7 +37,6 @@ export class ResetComponent implements OnInit {
 
     if (password === passwordRepeat) {
       const token = this.route.snapshot.paramMap.get('token');
-      console.log(token);
       this.authService
         .updatePassword(token, password)
         .subscribe(() => {
@@ -47,6 +46,7 @@ export class ResetComponent implements OnInit {
             '',
             { nzPlacement: 'bottomRight' },
           );
+          this.router.navigate(['/login']);
         },
         err => {
           this.notification.create(
@@ -55,12 +55,13 @@ export class ResetComponent implements OnInit {
             'Redirecting back to login',
             { nzPlacement: 'bottomRight'}
           );
+          this.router.navigate(['/login']);
         });
     } else {
       this.notification.create(
         'error',
         'Passwords do not match',
-        'Redirecting back to login',
+        '',
         { nzPlacement: 'bottomRight'},
       );
       }

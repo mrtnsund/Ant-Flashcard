@@ -35,7 +35,6 @@ export class ForgotComponent implements OnInit {
     .subscribe(
       () => {
         this.resetSent = true;
-        console.log(this.resetSent);
         // this.notification.create('success', `Reset mail sent to ${this.email}`, '', {nzPlacement: 'bottomRight'});
       },
       (err) => this.notification.create('error', err.error.error, '', {nzPlacement: 'bottomRight'})
