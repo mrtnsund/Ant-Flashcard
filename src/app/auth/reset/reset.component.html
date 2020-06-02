@@ -1,0 +1,23 @@
+<div class="background">
+  <div class="container">
+    <h1 nz-typography>New password</h1>
+    <p>Set a new password for your account</p>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" required/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please repeat your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="passwordRepeat" placeholder="Repeat your password" required/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button class="login-form-button login-form-margin" nzBlock [nzType]="'primary'">Set password</button>
+    </form>
+  </div>
+  </div>

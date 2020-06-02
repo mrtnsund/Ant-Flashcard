@@ -37,6 +37,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HotkeyModule } from 'angular2-hotkeys';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { HeaderComponent } from './header/header.component';
+import { ForgotComponent } from './auth/forgot/forgot.component';
+import { ResetComponent } from './auth/reset/reset.component';
 registerLocaleData(nb);
 
 @NgModule({
@@ -50,7 +52,9 @@ registerLocaleData(nb);
     AddComponent,
     RandomComponent,
     CustomComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForgotComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

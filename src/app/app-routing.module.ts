@@ -9,6 +9,8 @@ import { AddComponent } from './add/add.component';
 import { ReviewComponent } from './review/review.component';
 import { CustomComponent } from './review/custom/custom.component';
 import { RandomComponent } from './review/random/random.component';
+import { ForgotComponent } from './auth/forgot/forgot.component';
+import { ResetComponent } from './auth/reset/reset.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard]},
   { path: 'shuffle', component: RandomComponent, canActivate: [AuthGuard]},
   { path: 'custom', component: CustomComponent, canActivate: [AuthGuard]},
+  { path: 'forgot', component: ForgotComponent},
+  { path: 'forgot/:token', component: ResetComponent},
   { path: '404', component: PageNotFoundComponent},
   { path: '**', redirectTo: '/404'},
 ];

@@ -1,0 +1,82 @@
+<div class="background">
+  <div class="container">
+    <h1 nz-typography>Reset password</h1>
+    <p *ngIf="!resetSent">Enter your registered email</p>
+    <form nz-form class="login-form" [formGroup]="resetPassword" (ngSubmit)="submitForm()" *ngIf="!resetSent; else sentBlock"> 
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your email!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="email" placeholder="Email" required />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <button nz-button class="login-form-button login-form-margin" nzBlock [nzType]="'primary'">Reset</button>
+      <div class="bottomText">
+       <a [routerLink]="['/login']"> Go back? </a>
+      </div>
+    </form>
+  </div>
+  </div>
+
+  <ng-template #sentBlock>
+    <p>Reset email sent to {{ email }}</p><br>
+    <a [routerLink]="['/login']"> Go back? </a>
+  </ng-template>
+
+  <style>
+    .background {
+  background-color: #EBEFF5 !important;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  margin-top: 300px;
+  position: absolute;
+  text-align: center;
+  width: 25vw;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
+p {
+  color: #A5A5A5;
+  font-size: 16px;
+  margin-bottom: 5%;
+}
+a {
+  padding-top: 10px;
+  color: #4BDA81;
+  font-weight: bold;
+}
+.login-form-button {
+  height: 60px;
+  background-color: #4BDA81;
+  border: none;
+}
+.bottomText {
+  margin-top: 5%;
+}
+@media only screen and (max-width: 40.063em) {
+  .container {
+    width: 50vw;
+  }
+} /* min-width 641px, medium screens */
+@media only screen and (max-width: 30em) {
+  .container {
+    width: 90vw;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+    width: 35vw;
+  }
+}
+  </style>

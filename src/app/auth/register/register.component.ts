@@ -44,8 +44,6 @@ export class RegisterComponent implements OnInit {
     const email = this.validateForm.controls.email.value;
     const password = this.validateForm.controls.password.value;
     const passwordRepeat = this.validateForm.controls.passwordRepeat.value;
-    const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    const passwordRegex = new RegExp(/^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$/);
 
     if (email && password && passwordRepeat) {
       if ((password === passwordRepeat)) {
@@ -56,9 +54,7 @@ export class RegisterComponent implements OnInit {
           cards: [],
         };
 
-        if (emailRegex.test(email)) {
-          if (passwordRegex.test(password)) {
-            this.authService
+        this.authService
               .register(user)
               .pipe(timeout(5000))
               .subscribe(
@@ -77,29 +73,13 @@ export class RegisterComponent implements OnInit {
                 } else {
                 this.notification.create(
                   'error',
-                  `${err.message}`,
+                  `${err.error.error}`,
                   '',
                   {nzPlacement: 'bottomRight'},
                 );
                 }
               }
             );
-          } else {
-            this.notification.create(
-              'error',
-              'Password must contain at least one letter, at least one number, and be longer than six charaters.',
-              '',
-              {nzPlacement: 'bottomRight'},
-            );
-          }
-        } else {
-          this.notification.create(
-            'error',
-            'Please enter a valid email',
-            '',
-            {nzPlacement: 'bottomRight'}
-          );
-        }
       } else {
         this.notification.create(
           'error',

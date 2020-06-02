@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.notification.create(
               'error',
-              `${err.message}`,
+              `${err.error.error}`,
               '',
               {nzPlacement: 'bottomRight'},
             );

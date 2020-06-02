@@ -9,8 +9,9 @@ import { CardService } from './card.service';
   providedIn: 'root'
 })
 export class AuthService {
-    configUrl = 'https://pi-7a130fdb.localhost.run/user'; //RASPBERRY PI
- 
+    // configUrl = 'https://pi-7a130fdb.localhost.run/user'; //RASPBERRY PI 
+    configUrl = 'http://localhost:3001/user';
+
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   erServerOppe: boolean;
@@ -19,13 +20,26 @@ export class AuthService {
 
   }
 
+  reset(email: string) {
+    const emailObject = {
+      email
+    };
+    return this.http.post<any>(`${this.configUrl}/forgot`, emailObject);
+  }
 
   register(user: IUser) {
-    return this.http.post(`${this.configUrl}/signup`, user);
+    return this.http.post<any>(`${this.configUrl}/signup`, user);
   }
 
   login(user: IUser) {
     return this.http.post<any>(`${this.configUrl}/login`, user);
+  }
+
+  updatePassword(token, password) {
+    const passwordObject = {
+      password
+    };
+    return this.http.post<any>(`${this.configUrl}/forgot/${token}`, passwordObject);
   }
 
   getAccessToken() {

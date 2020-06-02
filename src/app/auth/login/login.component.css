@@ -8,7 +8,7 @@
   margin-top: 300px;
   position: absolute;
   text-align: center;
-  width: 35vw;
+  width: 20vw;
   left: 50%;
   right: 50%;
   transform: translate(-50%, -50%);
@@ -44,5 +44,10 @@ a {
   }
   p {
     font-size: 14px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+    width: 35vw;
   }
 }
