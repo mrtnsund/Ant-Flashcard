@@ -8,7 +8,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CardService {
-  configUrl = 'https://mrtnpie.serveo.net/api/flashcards'; //RASPBERRY PI
+  configUrl = 'https://shrouded-gorge-85581.herokuapp.com/api/flashcards'; 
+  //RASPBERRY PI
 
   // configUrl = 'http://localhost:3001/api/flashcards';
   token;

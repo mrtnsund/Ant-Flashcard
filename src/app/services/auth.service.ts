@@ -9,7 +9,9 @@ import { CardService } from './card.service';
   providedIn: 'root'
 })
 export class AuthService {
-    configUrl = 'https://mrtnpie.serveo.net/user'; //RASPBERRY PI 
+    configUrl = 'https://shrouded-gorge-85581.herokuapp.com/user';
+    
+    //RASPBERRY PI 
     // configUrl = 'http://localhost:3001/user';
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
