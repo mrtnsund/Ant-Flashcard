@@ -59,6 +59,12 @@ export class RegisterComponent implements OnInit {
               .pipe(timeout(5000))
               .subscribe(
                 (res: any) => {
+                  this.notification.create(
+                    'success',
+                    'Account created',
+                    `Account created for ${this.validateForm.controls.email.value} and we even logged you in 👍`,
+                    {nzPlacement: 'bottomRight'},
+                    );
                 localStorage.setItem('authorization', res.token);
                 this.router.navigate(['/home']);
                 },

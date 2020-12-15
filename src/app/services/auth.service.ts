@@ -9,10 +9,10 @@ import { CardService } from './card.service';
   providedIn: 'root'
 })
 export class AuthService {
-    configUrl = 'https://shrouded-gorge-85581.herokuapp.com/user';
+    //configUrl = 'https://shrouded-gorge-85581.herokuapp.com/user';
     
     //RASPBERRY PI 
-    // configUrl = 'http://localhost:3001/user';
+    configUrl = 'http://localhost:3001/user';
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};

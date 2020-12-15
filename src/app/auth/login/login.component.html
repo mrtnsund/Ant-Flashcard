@@ -1,27 +1,32 @@
 <div class="background">
-<div class="container">
-  <h1 nz-typography>Sign In</h1>
-  <p>Sign in below to start reviewing your cards</p>
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your email!">
-        <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="email" placeholder="Email" required />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your Password!">
-        <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Password" required/>
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
+  <div class="container">
+    <h1 nz-typography>Sign In</h1>
+    <p>Sign in below to start reviewing your cards</p>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your email!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="email" placeholder="Email" required />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" required />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
 
-    <button nz-button class="login-form-button login-form-margin" nzBlock [nzType]="'primary'">Sign in</button>
-    <div class="bottomText">
-      <a [routerLink]="['/register']">Sign up</a><br> <a [routerLink]="['/forgot']" style="padding-top: 10px;">Forgot your password?</a>
-    </div>
-  </form>
-</div>
+      <button nz-button class="login-form-button login-form-margin" nzBlock [nzType]="'primary'">Sign in</button>
+      <div class="bottomText">
+        <a [routerLink]="['/register']">Sign up</a><br>
+        <div style="padding-top: 10px;">
+          <a [routerLink]="['/forgot']">Forgot
+            your password?</a>
+        </div> 
+
+      </div>
+    </form>
+  </div>
 </div>

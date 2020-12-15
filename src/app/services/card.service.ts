@@ -8,10 +8,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CardService {
-  configUrl = 'https://shrouded-gorge-85581.herokuapp.com/api/flashcards'; 
+  //configUrl = 'https://shrouded-gorge-85581.herokuapp.com/api/flashcards'; 
   //RASPBERRY PI
 
-  // configUrl = 'http://localhost:3001/api/flashcards';
+  configUrl = 'http://localhost:3001/api/flashcards';
   token;
 
   constructor(private http: HttpClient, private authService: AuthService) {
